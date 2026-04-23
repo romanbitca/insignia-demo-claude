@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSIGNIA — Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F3EFE8;
+  --bg-deep: #EAE5DA;
+  --ink: #151311;
+  --ink-soft: #33302B;
+  --ink-dark: #0A0907;
+  --gold: #C9A961;
+  --gold-light: #D9BE82;
+  --gold-deep: #9A7C3E;
+  --muted: #8A8278;
+  --muted-2: #9C9488;
+  --hairline: rgba(21, 19, 17, 0.1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --card-rot: 42deg;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+*::selection { background: var(--gold); color: var(--ink-dark); }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 1200px 600px at 18% 8%, rgba(201, 169, 97, 0.08), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 88% 78%, rgba(201, 169, 97, 0.05), transparent 60%),
+    linear-gradient(180deg, #F5F1EA, #EDE8DF);
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+
+/* ============ HEADER ============ */
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 30px 56px 24px;
+  gap: 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 20;
+}
+
+.brand-logo {
+  height: 22px;
+  width: auto;
+  display: block;
+  cursor: pointer;
+  filter: none;
+}
+
+.nav {
+  display: flex;
+  gap: 44px;
+  margin-left: auto;
+  margin-right: 28px;
+}
+
+.nav a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 8px 2px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.01em;
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav a:hover { color: var(--gold-deep); }
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--ink);
+}
+
+.nav a svg { width: 10px; height: 10px; opacity: 0.6; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 0.3s var(--ease-out);
+}
+
+.icon-btn:hover { background: rgba(21, 19, 17, 0.05); }
+
+.btn {
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.35s var(--ease-out);
+  border: 1px solid transparent;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-dark:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(21, 19, 17, 0.25);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(21, 19, 17, 0.22);
+  color: var(--ink);
+}
+.btn-outline:hover {
+  border-color: var(--ink);
+  background: rgba(21, 19, 17, 0.03);
+}
+
+/* ============ HERO ============ */
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  padding: 46px 80px 20px;
+  align-items: start;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-title {
+  font-family: 'Prata', serif;
+  font-weight: 400;
+  font-size: clamp(48px, 5.4vw, 78px);
+  line-height: 1.05;
+  letter-spacing: -0.002em;
+  color: var(--ink);
+}
+
+.hero-title .it {
+  font-style: italic;
+  font-family: 'Prata', serif;
+  opacity: 0.95;
+}
+
+.hero-title .accent-line {
+  display: block;
+  width: 48px;
+  height: 1.5px;
+  background: var(--gold);
+  margin-top: 32px;
+}
+
+.hero-eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-aside {
+  padding-top: 70px;
+  max-width: 440px;
+}
+
+.hero-desc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin-bottom: 30px;
+}
+
+.cta-dark {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 16px 32px 15px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Prata', serif;
+  font-weight: 400;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+  transition: all 0.35s var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cta-dark:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(21, 19, 17, 0.25);
+  padding-right: 40px;
+}
+
+.cta-dark svg {
+  transition: transform 0.35s var(--ease-out);
+  width: 14px;
+}
+.cta-dark:hover svg { transform: translateX(4px); }
+
+/* ============ CARD STAGE ============ */
+.card-stage {
+  position: relative;
+  padding: 80px 40px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 480px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.card-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+  Structure:
+    .card-wrapper  — entry fade only (opacity)
+      .card-transform — rotation + scale + translate (selection anim)
+        .card-face   — the card image / SVG
+*/
+
+.card-wrapper {
+  flex: none;
+  width: 246px;
+  height: 156px;
+  margin-left: -112px;
+  position: relative;
+  cursor: pointer;
+  opacity: 1;
+  transition:
+    opacity 0.7s var(--ease-smooth),
+    filter 0.7s var(--ease-smooth);
+  z-index: 1;
+}
+
+.card-wrapper:first-child { margin-left: 0; }
+
+.card-transform {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translate(0, 0) rotate(var(--card-rot)) scale(1);
+  transform-origin: center center;
+  transition: transform 0.9s var(--ease-smooth);
+  will-change: transform;
+}
+
+/* --- hover (when nothing selected yet) --- */
+.card-wrapper:hover:not(.selected) .card-transform {
+  transform: translate(0, -10px) rotate(var(--card-rot)) scale(1.03);
+}
+
+.card-wrapper:hover:not(.selected) { z-index: 5; }
+
+/* --- selected --- */
+.card-wrapper.selected {
+  z-index: 15;
+  cursor: default;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.card-wrapper.selected .card-transform {
+  transform: translate(0, -62px) rotate(var(--card-rot)) scale(1.5);
+}
+
+/* --- when a selection exists, dim the rest --- */
+.card-row.has-selection .card-wrapper:not(.selected) {
+  opacity: 0.32;
+  filter: saturate(0.7) brightness(0.94);
+}
+
+.card-row.has-selection .card-wrapper:not(.selected):hover {
+  opacity: 0.68;
+}
+
+.card-row.has-selection .card-wrapper:not(.selected):hover .card-transform {
+  transform: translate(0, -10px) rotate(var(--card-rot)) scale(1.05);
+}
+
+/* --- entry animation (opacity + small lift) --- */
+.card-wrapper.is-entering {
+  opacity: 0;
+}
+.card-wrapper.is-entering .card-transform {
+  transform: translate(0, 28px) rotate(var(--card-rot)) scale(0.85);
+}
+
+/* ============ CARD FACE ============ */
+.card-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+  box-shadow:
+    0 2px 4px rgba(21, 19, 17, 0.08),
+    0 8px 24px rgba(21, 19, 17, 0.1),
+    0 24px 50px rgba(21, 19, 17, 0.08);
+  transition: box-shadow 0.9s var(--ease-smooth);
+}
+
+.card-wrapper.selected .card-face {
+  box-shadow:
+    0 6px 14px rgba(21, 19, 17, 0.2),
+    0 26px 60px rgba(21, 19, 17, 0.28),
+    0 60px 120px rgba(21, 19, 17, 0.22);
+}
+
+.card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 13px 16px 13px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  z-index: 2;
+}
+
+.card-content.dark { color: var(--ink); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-brand {
+  font-family: 'Prata', serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-chip { width: 28px; height: 22px; }
+
+.card-visa-block { text-align: right; }
+
+.card-visa {
+  font-family: 'Manrope', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.card-visa-tag {
+  font-family: 'Manrope', sans-serif;
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.95;
+  line-height: 1;
+}
+
+.card-signal {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  opacity: 0.85;
+}
+
+/* ============ INFO ROW ============ */
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  padding: 30px 120px 70px;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  transition: opacity 0.32s var(--ease-out), transform 0.32s var(--ease-out);
+}
+
+.info-row.swapping {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.info-cell {
+  text-align: center;
+  padding: 0 6px;
+}
+
+.info-label {
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.info-value {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+
+/* ============ FEATURES ============ */
+.features {
+  margin: 20px 56px 72px;
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(201, 169, 97, 0.1), transparent 50%),
+    radial-gradient(ellipse at 15% 90%, rgba(201, 169, 97, 0.05), transparent 50%),
+    linear-gradient(180deg, #262220, #171512);
+  border-radius: 28px;
+  padding: 56px 48px 62px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(21, 19, 17, 0.22);
+  max-width: 1488px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.03 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 44px;
+  position: relative;
+}
+
+.feature {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0 10px;
+  position: relative;
+}
+
+.feature + .feature::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(201, 169, 97, 0.22) 20%, rgba(201, 169, 97, 0.22) 80%, transparent);
+}
+
+.feature-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 22px;
+  color: var(--gold);
+  display: grid;
+  place-items: center;
+}
+
+.feature-icon svg { width: 100%; height: 100%; }
+
+.feature-title {
+  font-family: 'Prata', serif;
+  font-weight: 400;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 14px;
+  letter-spacing: 0.002em;
+}
+
+.feature-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 250px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* ============ ENTRY FADE FOR NON-CARD ELEMENTS ============ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.95s var(--ease-out) forwards;
+}
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.d-05 { animation-delay: 0.05s; }
+.d-1 { animation-delay: 0.12s; }
+.d-2 { animation-delay: 0.22s; }
+.d-3 { animation-delay: 0.32s; }
+.d-4 { animation-delay: 0.42s; }
+.d-5 { animation-delay: 0.52s; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1280px) {
+  .hero { grid-template-columns: 1fr; gap: 20px; padding: 40px 40px 12px; }
+  .hero-aside { padding-top: 0; }
+  .site-header { padding: 24px 32px; }
+  .card-wrapper { width: 216px; height: 136px; margin-left: -100px; }
+  .info-row { padding: 20px 40px 60px; }
+  .features { margin: 12px 32px 48px; padding: 42px 28px 48px; }
+  .features-grid { gap: 28px; }
+}
+
+@media (max-width: 920px) {
+  .nav { display: none; }
+  .card-stage { overflow-x: auto; padding: 50px 20px 30px; }
+  .info-row { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  .feature + .feature::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <img class="brand-logo fade-in d-05" src="assets/logoInsignia.png" alt="INSIGNIA">
+  <nav class="nav fade-in d-1">
+    <a href="#">Services <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1.5 3.5 L5 7 L8.5 3.5"/></svg></a>
+    <a href="#" class="active">Cards</a>
+    <a href="#">News</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="header-actions fade-in d-2">
+    <button class="icon-btn" aria-label="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/></svg>
+    </button>
+    <button class="btn btn-dark">Speak to an Advisor</button>
+    <button class="btn btn-outline">Login</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1 class="hero-title fade-in d-3">
+        C by Insignia<br>
+        Business Debit Card
+        <span class="accent-line"></span>
+      </h1>
+    </div>
+    <div class="hero-aside fade-in d-4">
+      <p class="hero-desc" id="hero-desc">
+        A super-premium business debit card designed for C-level executives
+        who require control, flexibility, travel support, and premium service.
+      </p>
+      <button class="cta-dark">
+        Enquire Now
+        <svg viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="card-stage">
+    <div class="card-row" id="card-row"><!-- cards injected --></div>
+  </section>
+
+  <section class="info-row" id="info-row">
+    <div class="info-cell">
+      <div class="info-label">Card Type:</div>
+      <div class="info-value" data-key="type"></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-label">Best For:</div>
+      <div class="info-value" data-key="bestFor"></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-label">Billing Cycle:</div>
+      <div class="info-value" data-key="cycle"></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-label">Currencies:</div>
+      <div class="info-value" data-key="currencies"></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-label">Supplementary:</div>
+      <div class="info-value" data-key="supplementary"></div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="20" cy="14" r="5.5"/>
+            <path d="M8 34c2-6.5 6.8-10 12-10s10 3.5 12 10"/>
+            <path d="M28 10l2 1.5 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Executive Tier</h3>
+        <p class="feature-desc">Built specifically for C-level executives requiring uncompromising service and global access.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="20" cy="20" r="7"/>
+            <path d="M20 5.5v4M20 30.5v4M5.5 20h4M30.5 20h4M9.7 9.7l2.8 2.8M27.5 27.5l2.8 2.8M9.7 30.3l2.8-2.8M27.5 12.5l2.8-2.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Real-Time Control</h3>
+        <p class="feature-desc">Granular expense oversight, dynamic limits, and comprehensive company-wide tracking.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="20" cy="20" r="14"/>
+            <ellipse cx="20" cy="20" rx="6" ry="14"/>
+            <path d="M6 20h28M8 12.5h24M8 27.5h24"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Multi-Currency</h3>
+        <p class="feature-desc">Seamless base capability across USD, EUR, GBP, and CHF for borderless business.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="14" cy="15" r="5"/>
+            <circle cx="28" cy="17" r="4"/>
+            <path d="M4 32c1.6-5.5 5.4-8.5 10-8.5s8.4 3 10 8.5"/>
+            <path d="M22.5 31c1-4.5 4-7 7.5-7s6.5 2.5 7.5 7"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Dedicated Support</h3>
+        <p class="feature-desc">24/7 key account management, onboarding, and personalized concierge assistance.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+// ============ CARD DATA ============
+const cards = [
+  {
+    id: 'paradise',
+    title: 'Paradise',
+    hero: 'Paradise by Insignia Personal Card',
+    type: 'Personal Credit',
+    bestFor: 'Lifestyle Curators',
+    cycle: 'Monthly',
+    currencies: 'USD, EUR',
+    supplementary: 'Three included, premium access',
+    image: 'assets/card_01.png'
+  },
+  {
+    id: 'billionaire',
+    title: 'Billionaire',
+    hero: 'Billionaire by Insignia Black Card',
+    type: 'Ultra-Premium Credit',
+    bestFor: 'High-Net-Worth Individuals',
+    cycle: 'Custom',
+    currencies: 'USD, EUR, GBP, CHF, JPY',
+    supplementary: 'Unlimited, by invitation only',
+    image: 'assets/card_02.png'
+  },
+  {
+    id: 'celestial',
+    title: 'C by Insignia Celestial',
+    hero: 'C by Insignia Celestial Card',
+    type: 'Premium Debit',
+    bestFor: 'Global Travellers',
+    cycle: 'Monthly',
+    currencies: 'USD, EUR, GBP',
+    supplementary: 'Five included, complimentary',
+    image: 'assets/card_03.png'
+  },
+  {
+    id: 'c-insignia',
+    title: 'C by Insignia',
+    hero: 'C by Insignia Business Debit Card',
+    type: 'Business Debit',
+    bestFor: 'C-Level Executives',
+    cycle: 'Monthly',
+    currencies: 'USD, EUR, GBP, CHF',
+    supplementary: 'Five included, subject to conditions',
+    image: 'assets/card_04.png'
+  },
+  {
+    id: 'signature',
+    title: 'Signature',
+    hero: 'Signature by Insignia Gold Card',
+    type: 'Business Credit',
+    bestFor: 'Executive Teams',
+    cycle: 'Monthly',
+    currencies: 'USD, EUR, GBP',
+    supplementary: 'Eight included, corporate tier',
+    image: 'assets/card_05.png'
+  },
+  {
+    id: 'plume',
+    title: 'Plume',
+    hero: 'Plume by Insignia Infinite Card',
+    type: 'Personal Credit',
+    bestFor: 'Art Collectors & Patrons',
+    cycle: 'Custom',
+    currencies: 'USD, EUR, CHF',
+    supplementary: 'Four included, curated',
+    image: 'assets/card_06.png'
+  },
+  {
+    id: 'royal',
+    title: 'Royal',
+    hero: 'Royal by Insignia Heritage Card',
+    type: 'Heritage Credit',
+    bestFor: 'Legacy Families',
+    cycle: 'Quarterly',
+    currencies: 'USD, EUR, GBP, AED',
+    image: 'assets/card_07.png'
+  }
+];
+
+// ============ SVG FACTORIES (cards 5-8) ============
+function chipSVG() {
+  return `<svg class="card-chip" viewBox="0 0 32 26" width="32" height="26" aria-hidden="true">
+    <defs>
+      <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#EAD08C"/>
+        <stop offset="0.55" stop-color="#C9A961"/>
+        <stop offset="1" stop-color="#856934"/>
+      </linearGradient>
+    </defs>
+    <rect width="32" height="26" rx="4" fill="url(#cg)"/>
+    <g stroke="#5E4720" stroke-width="0.45" fill="none" opacity="0.7">
+      <rect x="3.5" y="3.5" width="25" height="19" rx="2"/>
+      <line x1="16" y1="3.5" x2="16" y2="22.5"/>
+      <line x1="3.5" y1="13" x2="28.5" y2="13"/>
+      <line x1="3.5" y1="8" x2="12" y2="8"/>
+      <line x1="3.5" y1="18" x2="12" y2="18"/>
+      <line x1="20" y1="8" x2="28.5" y2="8"/>
+      <line x1="20" y1="18" x2="28.5" y2="18"/>
+    </g>
+  </svg>`;
+}
+
+function signalSVG(color = 'currentColor') {
+  return `<svg class="card-signal" viewBox="0 0 16 16" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" aria-hidden="true">
+    <path d="M3 5.5 Q5 8 3 10.5"/>
+    <path d="M6 3.5 Q9.5 8 6 12.5"/>
+    <path d="M9 1.5 Q14 8 9 14.5"/>
+  </svg>`;
+}
+
+function faceSVG(variant) {
+  switch (variant) {
+    case 'signature':
+      return `<svg class="card-bg" viewBox="0 0 400 252" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="s-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#EFD598"/>
+            <stop offset="0.4" stop-color="#D4B168"/>
+            <stop offset="1" stop-color="#8A6D33"/>
+          </linearGradient>
+          <linearGradient id="s-shine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(255,255,255,0)"/>
+            <stop offset="0.5" stop-color="rgba(255,245,210,0.45)"/>
+            <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="252" fill="url(#s-bg)"/>
+        <g stroke="#7A5B26" stroke-width="0.4" opacity="0.3">
+          ${Array.from({length: 80}, (_, i) => `<line x1="${-100 + i*8}" y1="0" x2="${-100 + i*8 + 80}" y2="252"/>`).join('')}
+        </g>
+        <rect width="400" height="252" fill="url(#s-shine)" opacity="0.5"/>
+        <g transform="translate(200, 126)">
+          <circle r="42" fill="none" stroke="#7A5B26" stroke-width="0.7" opacity="0.55"/>
+          <circle r="36" fill="none" stroke="#7A5B26" stroke-width="0.4" opacity="0.4"/>
+          <text y="12" text-anchor="middle" font-family="Prata, serif" font-size="46" fill="#6B4E20" opacity="0.85" font-style="italic">I</text>
+        </g>
+      </svg>`;
+    case 'plume':
+      return `<svg class="card-bg" viewBox="0 0 400 252" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="pl-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F4EDDF"/>
+            <stop offset="1" stop-color="#E3D6B8"/>
+          </linearGradient>
+          <linearGradient id="pl-feather" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D4B168"/>
+            <stop offset="1" stop-color="#8A6D33"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="252" fill="url(#pl-bg)"/>
+        <g transform="translate(200, 126) rotate(-18)">
+          <path d="M 0 -115 C -50 -90 -80 -30 -70 40 C -60 80 -30 110 0 120 C 30 110 60 80 70 40 C 80 -30 50 -90 0 -115 Z" fill="none" stroke="url(#pl-feather)" stroke-width="1.2" opacity="0.9"/>
+          <line x1="0" y1="-115" x2="0" y2="120" stroke="url(#pl-feather)" stroke-width="1.2"/>
+          <g stroke="url(#pl-feather)" stroke-width="0.7" fill="none" stroke-linecap="round" opacity="0.85">
+            ${Array.from({length: 18}, (_, i) => {
+              const t = -100 + i * 12;
+              const w = Math.sin((i + 1) / 20 * Math.PI) * 65 + 5;
+              const sag = Math.sin((i + 1) / 20 * Math.PI) * 4;
+              return `<path d="M 0 ${t} Q ${-w/2} ${t - sag} ${-w} ${t + 6}"/><path d="M 0 ${t} Q ${w/2} ${t - sag} ${w} ${t + 6}"/>`;
+            }).join('')}
+          </g>
+          <circle cx="0" cy="-40" r="16" fill="#8A6D33" opacity="0.3"/>
+          <circle cx="0" cy="-40" r="10" fill="#4A3815" opacity="0.5"/>
+        </g>
+      </svg>`;
+    case 'royal':
+      return `<svg class="card-bg" viewBox="0 0 400 252" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="r-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1E1814"/>
+            <stop offset="0.5" stop-color="#120C09"/>
+            <stop offset="1" stop-color="#080503"/>
+          </linearGradient>
+          <linearGradient id="r-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#EACA80"/>
+            <stop offset="1" stop-color="#8A6D33"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="252" fill="url(#r-bg)"/>
+        <g fill="#C9A961" opacity="0.08">
+          ${Array.from({length: 20}, (_, i) =>
+            Array.from({length: 12}, (_, j) => {
+              const x = i * 24 + (j % 2 === 0 ? 0 : 12);
+              const y = j * 24;
+              return `<path d="M ${x} ${y} l 4 -4 l 4 4 l -4 4 z"/>`;
+            }).join('')
+          ).join('')}
+        </g>
+        <g transform="translate(200, 110)" stroke="url(#r-gold)" stroke-width="0.9" fill="none">
+          <path d="M -50 20 L -45 -25 L -25 0 L -12 -32 L 0 -10 L 12 -32 L 25 0 L 45 -25 L 50 20 Z" fill="url(#r-gold)" fill-opacity="0.22"/>
+          <circle cx="-45" cy="-30" r="3.2" fill="url(#r-gold)"/>
+          <circle cx="-12" cy="-38" r="3.2" fill="url(#r-gold)"/>
+          <circle cx="0" cy="-18" r="3" fill="url(#r-gold)"/>
+          <circle cx="12" cy="-38" r="3.2" fill="url(#r-gold)"/>
+          <circle cx="45" cy="-30" r="3.2" fill="url(#r-gold)"/>
+          <path d="M -50 20 L 50 20 L 52 30 L -52 30 Z" fill="url(#r-gold)" fill-opacity="0.3"/>
+          <path d="M -40 30 L -40 45 M -20 30 L -20 48 M 0 30 L 0 48 M 20 30 L 20 48 M 40 30 L 40 45"/>
+        </g>
+        <text x="200" y="180" text-anchor="middle" font-family="Prata, serif" font-size="16" fill="#C9A961" letter-spacing="10">ROYAL</text>
+        <text x="200" y="198" text-anchor="middle" font-family="Prata, serif" font-size="8" fill="#C9A961" letter-spacing="5" opacity="0.7" font-style="italic">by Insignia</text>
+      </svg>`;
+    case 'polo':
+      return `<svg class="card-bg" viewBox="0 0 400 252" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="po-bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#121010"/>
+            <stop offset="1" stop-color="#030202"/>
+          </linearGradient>
+          <linearGradient id="po-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#EACA80"/>
+            <stop offset="1" stop-color="#8A6D33"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="252" fill="url(#po-bg)"/>
+        <g transform="translate(200, 120)" fill="url(#po-gold)" opacity="0.92">
+          <g transform="rotate(-25)">
+            <path d="M 0 0 L -90 -55" stroke="url(#po-gold)" stroke-width="1.1" fill="none"/>
+            ${Array.from({length: 9}, (_, i) => {
+              const t = i / 9;
+              const x = -90 * t;
+              const y = -55 * t;
+              return `<ellipse cx="${x - 2}" cy="${y - 8}" rx="7" ry="3" transform="rotate(${-30 + i*4} ${x} ${y})" fill="url(#po-gold)"/>
+                      <ellipse cx="${x + 2}" cy="${y + 8}" rx="7" ry="3" transform="rotate(${30 - i*4} ${x} ${y})" fill="url(#po-gold)"/>`;
+            }).join('')}
+          </g>
+          <g transform="rotate(25) scale(-1,1)">
+            <path d="M 0 0 L -90 -55" stroke="url(#po-gold)" stroke-width="1.1" fill="none"/>
+            ${Array.from({length: 9}, (_, i) => {
+              const t = i / 9;
+              const x = -90 * t;
+              const y = -55 * t;
+              return `<ellipse cx="${x - 2}" cy="${y - 8}" rx="7" ry="3" transform="rotate(${-30 + i*4} ${x} ${y})" fill="url(#po-gold)"/>
+                      <ellipse cx="${x + 2}" cy="${y + 8}" rx="7" ry="3" transform="rotate(${30 - i*4} ${x} ${y})" fill="url(#po-gold)"/>`;
+            }).join('')}
+          </g>
+          <circle r="14" fill="#050403" stroke="url(#po-gold)" stroke-width="0.8"/>
+          <text y="5" text-anchor="middle" font-family="Prata, serif" font-size="15" font-style="italic" fill="url(#po-gold)">P</text>
+        </g>
+        <text x="200" y="204" text-anchor="middle" font-family="Prata, serif" font-size="11" fill="#C9A961" letter-spacing="8">POLO CLUB</text>
+      </svg>`;
+  }
+  return '';
+}
+
+function cardContentSVG(card) {
+  // Content overlay for the SVG cards (5-8)
+  const dark = card.textDark === true;
+  const signalColor = dark ? 'var(--ink-dark)' : '#fff';
+  const textColor = dark ? '#5E4720' : '#fff';
+
+  let topCorner = `<div class="card-brand" style="color:${textColor}">${card.title}</div>`;
+  let visaTag = 'Infinite';
+  if (card.variant === 'polo') visaTag = 'Signature';
+  const visaColor = (card.variant === 'royal' || card.variant === 'polo') ? '#fff' : textColor;
+
+  return `
+    <div class="card-content ${dark ? 'dark' : ''}">
+      <div class="card-top">
+        ${topCorner}
+        <span style="color:${signalColor}">${signalSVG(signalColor)}</span>
+      </div>
+      <div class="card-bottom">
+        ${chipSVG()}
+        <div class="card-visa-block" style="color:${visaColor}">
+          <div class="card-visa">VISA</div>
+          <div class="card-visa-tag">${visaTag}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function cardMarkup(card, idx) {
+  // Image card (1-4)
+  if (card.image) {
+    return `
+      <div class="card-wrapper is-entering" data-idx="${idx}" role="button" tabindex="0" aria-label="${card.hero}">
+        <div class="card-transform">
+          <div class="card-face">
+            <img class="card-img" src="${card.image}" alt="${card.hero}" draggable="false">
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  // SVG card (5-8)
+  return `
+    <div class="card-wrapper is-entering" data-idx="${idx}" role="button" tabindex="0" aria-label="${card.hero}">
+      <div class="card-transform">
+        <div class="card-face">
+          ${faceSVG(card.variant)}
+          ${cardContentSVG(card)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ============ RENDER ============
+const row = document.getElementById('card-row');
+row.innerHTML = cards.map(cardMarkup).join('');
+
+const infoRow = document.getElementById('info-row');
+let currentIdx = -1; // nothing selected on load
+const DEFAULT_INFO_IDX = 3; // info row shows C by Insignia data by default
+
+function applyCard(idx, { animate = true } = {}) {
+  const card = cards[idx];
+  const doSwap = () => {
+    infoRow.querySelectorAll('.info-value').forEach(el => {
+      const k = el.dataset.key;
+      el.textContent = card[k];
+    });
+  };
+
+  if (animate) {
+    infoRow.classList.add('swapping');
+    setTimeout(() => {
+      doSwap();
+      requestAnimationFrame(() => {
+        infoRow.classList.remove('swapping');
+      });
+    }, 260);
+  } else {
+    doSwap();
+  }
+
+  row.classList.add('has-selection');
+  document.querySelectorAll('.card-wrapper').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+
+  currentIdx = idx;
+}
+
+// initial state: populate info-row with default info only — no card is selected
+(function init() {
+  const card = cards[DEFAULT_INFO_IDX];
+  infoRow.querySelectorAll('.info-value').forEach(el => {
+    const k = el.dataset.key;
+    el.textContent = card[k];
+  });
+
+  // Staggered entry: remove .is-entering from each card in turn so they
+  // transition in at their natural (rest) size and full opacity.
+  const items = Array.from(document.querySelectorAll('.card-wrapper'));
+  items.forEach((el, i) => {
+    setTimeout(() => el.classList.remove('is-entering'), 220 + i * 75);
+  });
+})();
+
+// events
+row.addEventListener('click', (e) => {
+  const wrapper = e.target.closest('.card-wrapper');
+  if (!wrapper || wrapper.classList.contains('is-entering')) return;
+  const idx = +wrapper.dataset.idx;
+  if (idx === currentIdx && row.classList.contains('has-selection')) return;
+  applyCard(idx);
+});
+
+row.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const wrapper = e.target.closest('.card-wrapper');
+  if (!wrapper) return;
+  e.preventDefault();
+  const idx = +wrapper.dataset.idx;
+  if (idx === currentIdx) return;
+  applyCard(idx);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft' && currentIdx > 0) applyCard(currentIdx - 1);
+  else if (e.key === 'ArrowRight' && currentIdx < cards.length - 1) applyCard(currentIdx + 1);
+});
+</script>
+</body>
+</html>
