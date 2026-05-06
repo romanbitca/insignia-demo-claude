@@ -1,4 +1,6 @@
 .DS_Store
 
-# Claude Code local config (machine-specific paths, personal settings)
-.claude/
+# Claude Code local-only files
+# Shared team config (settings.json, commands/, agents/, hooks/, skills/) IS committed.
+.claude/settings.local.json
+.claude/launch.json
